@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rich Goldstein · Mapa del Content Pipeline</title>
-<meta name="description" content="Mapa mental del pipeline de contenido de Rich Goldstein: de los activos crudos a las siete líneas de salida.">
+<title>Rich Goldstein · Content Pipeline Map</title>
+<meta name="description" content="Mind map of Rich Goldstein's content pipeline: from raw assets to seven output lanes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -104,9 +104,6 @@
   .stage li{ font-size:12.5px; line-height:1.55; color: var(--ink-soft); margin-bottom:6px; }
   .stage li:last-child{ margin-bottom:0; }
   .stage li b{ color: var(--ink); font-weight:600; }
-  .stage-arrow{
-    display:none;
-  }
   @media (min-width: 561px){
     .spine .stage:not(:last-child)::after{
       content:"→"; position:absolute; right:-13px; top:50%; transform:translateY(-50%);
@@ -229,46 +226,46 @@
   </header>
 
   <div class="intro">
-    <div class="eyebrow">Mapa del Content Pipeline &middot; Preparado por C-Suite Network</div>
-    <h1>De un activo crudo a siete líneas de salida.</h1>
-    <p class="sub">Así se mueve cada pieza de contenido de Rich: entra como grabación cruda, pasa por tres filtros de calidad, y de ahí se reparte en <b>siete líneas de salida</b> distintas &mdash; artículos, infografías, pitches de medios, guiones de sala de juntas, boards, el consejo de pensamiento y el Hero Club. Haz clic en cada línea para ver el detalle: insumos, salidas y estado actual.</p>
+    <div class="eyebrow">Content Pipeline Map &middot; Prepared by C-Suite Network</div>
+    <h1>From a raw asset to seven output lanes.</h1>
+    <p class="sub">Here's how every piece of Rich's content moves: it comes in as a raw recording, passes through three quality filters, and from there gets routed into <b>seven output lanes</b> &mdash; articles, infographics, media pitches, boardroom scripts, boards, the thought council, and the Hero Club. Click any lane to see the detail: inputs, outputs, and current status.</p>
   </div>
 
   <!-- STAGE 1-4 SPINE -->
   <div class="spine">
     <div class="stage">
-      <span class="num">ETAPA 1</span>
-      <h3>Activos crudos</h3>
+      <span class="num">STAGE 1</span>
+      <h3>Raw assets</h3>
       <ul>
-        <li>Episodios de podcast <b>(Innovations &amp; Breakthroughs)</b></li>
-        <li>Videos de <b>Patent Question</b></li>
-        <li>Videos de <b>Goldstein Patent Law</b></li>
-        <li>Decks y documentos propios de Rich <b>(Sales Deck, materiales de workshop)</b></li>
+        <li>Podcast episodes <b>(Innovations &amp; Breakthroughs)</b></li>
+        <li><b>Patent Question</b> videos</li>
+        <li><b>Goldstein Patent Law</b> videos</li>
+        <li>Rich's own decks and documents <b>(Sales Deck, workshop materials)</b></li>
       </ul>
     </div>
     <div class="stage">
-      <span class="num">ETAPA 2</span>
-      <h3>Transcribir y verificar</h3>
+      <span class="num">STAGE 2</span>
+      <h3>Transcribe and verify</h3>
       <ul>
-        <li>Cada fuente se transcribe por completo antes de seleccionar nada.</li>
-        <li>Ningún timestamp o cita se usa de memoria.</li>
-        <li>Cada afirmación se verifica contra la transcripción real.</li>
+        <li>Every source is transcribed in full before anything is selected.</li>
+        <li>No timestamp or quote is used from memory.</li>
+        <li>Every claim is checked against the actual transcript.</li>
       </ul>
     </div>
     <div class="stage">
-      <span class="num">ETAPA 3</span>
-      <h3>Filtro de calidad &middot; dos reglas</h3>
+      <span class="num">STAGE 3</span>
+      <h3>Quality gate &middot; two rules</h3>
       <ul>
-        <li><b>Regla 1 &mdash; Solo Rich.</b> Se excluyen episodios dominados por un invitado, aunque su historia sea buena.</li>
-        <li><b>Regla 2 &mdash; Autocontenido y corto.</b> Un gancho más un cierre, 15 a 90 segundos, entendible sin contexto adicional.</li>
+        <li><b>Rule 1 &mdash; Rich only.</b> Guest-dominated episodes are excluded, even if the guest's story is compelling.</li>
+        <li><b>Rule 2 &mdash; Self-contained and short.</b> One hook plus one payoff, 15 to 90 seconds, understandable with no added context.</li>
       </ul>
     </div>
     <div class="stage">
-      <span class="num">ETAPA 4</span>
-      <h3>Aprobar antes de cortar</h3>
+      <span class="num">STAGE 4</span>
+      <h3>Approve before cutting</h3>
       <ul>
-        <li>La lista completa (fuente, timestamp, cita exacta) se revisa antes de cortar un solo clip.</li>
-        <li>Nada entra a la carpeta de Snippets sin aprobación previa.</li>
+        <li>The full list (source, timestamp, exact quote) is reviewed before a single clip is cut.</li>
+        <li>Nothing goes into the Snippets folder without sign off first.</li>
       </ul>
     </div>
   </div>
@@ -276,83 +273,83 @@
   <div class="funnel-down">&#8681;</div>
 
   <div class="lanes-head">
-    <div class="eyebrow">Etapa 5</div>
-    <h2>Siete líneas de salida</h2>
-    <p>Los clips y citas ya aprobados se enrutan hacia la línea donde generan más valor.</p>
+    <div class="eyebrow">Stage 5</div>
+    <h2>Seven output lanes</h2>
+    <p>Approved source clips and quotes are routed into the lane where they create value.</p>
   </div>
 
   <div class="lanes" id="lanes"></div>
 
   <div class="legend">
-    <span><i class="green"></i> Aprobado / presentado</span>
-    <span><i class="blue"></i> Clips fuente listos</span>
-    <span><i class="amber"></i> Primer borrador / en curso</span>
-    <span><i class="grey"></i> Sin iniciar</span>
+    <span><i class="green"></i> Approved / presented</span>
+    <span><i class="blue"></i> Source clips ready</span>
+    <span><i class="amber"></i> First draft / in progress</span>
+    <span><i class="grey"></i> Not started</span>
   </div>
 
-  <div class="footnote">Rich Goldstein &middot; Content Pipeline &mdash; mapa preparado por C-Suite Network a partir del whiteboard de trabajo.</div>
+  <div class="footnote">Rich Goldstein &middot; Content Pipeline &mdash; map prepared by C-Suite Network from the working whiteboard.</div>
 </div>
 
 <script>
 (function(){
   const LANES = [
     {
-      id: 'A', name: 'C-Suite IP Articles', status: 'amber', statusLabel: 'Primer borrador listo',
-      tag: "De las palabras de Rich a un artículo escrito.",
+      id: 'A', name: 'C-Suite IP Articles', status: 'amber', statusLabel: 'First draft exists',
+      tag: "From Rich's words to an article.",
       pool: ["Rich's Sales Deck", "Podcast Ep 109", "Five Patent Question videos", "Goldstein Patent Law video"],
-      desc: "Cada artículo se empareja con las fuentes que ya cubren su tema.",
+      desc: "Each article is matched to the sources that already cover its topic.",
       table: {
-        headers: ["Artículo", "Fuente(s)", "De qué se nutre"],
+        headers: ["Article", "Source(s) used", "What it draws on"],
         rows: [
-          ["How Ignoring Your IP Lowers Your Exit Multiple", "Sales Deck · Ep 109 · Five Patent Mistakes", "Los escenarios de valoración $30M/$35M/$60M, la explicación de “game changes”, la historia ROI del fundador SaaS, la analogía de Rembrandt"],
-          ["Five Costliest Patent Mistakes", "Five Patent Mistakes (video completo)", "Los cinco errores en orden, más la historia del fundador SaaS como cierre"],
-          ["The Power Equation", "Sales Deck · Ep 109", "El marco de las 4 C's de los intangibles, el dato 1975-vs-hoy, la prueba de superposición “protegible y comercializable”"],
-          ["Evaluate Before You File", "Biggest Mistake in a Rush · Finding the Best Prior Art", "El argumento provisional-vs-estrategia, la lección del abrelatas en búsqueda por clasificación"],
-          ["What AI Gets Wrong About Your Patent", "7 ChatGPT Mistakes · The Hidden Risk of AI · Protect Your Invention Idea", "El encuadre de confidencialidad/divulgación/timing, la tesis “AI predicts, it doesn't create”, los errores específicos de ChatGPT"],
-          ["Every Business Needs a Trademark Before You Start a Patent Project", "Desglose completo de patente/marca/copyright", "Incluye el ejemplo de la marca Coca-Cola"]
+          ["How Ignoring Your IP Lowers Your Exit Multiple", "Sales Deck · Ep 109 · Five Patent Mistakes", "The $30M/$35M/$60M valuation scenarios, the “game changes” explanation, the SaaS founder ROI story, the Rembrandt analogy"],
+          ["Five Costliest Patent Mistakes", "Five Patent Mistakes (full video)", "All five mistakes, in order, plus the SaaS founder story as the closing case"],
+          ["The Power Equation", "Sales Deck · Ep 109", "The 4 C's of intangibles framework, the 1975-vs-today tangible/intangible data, the “protectable and marketable” overlap test"],
+          ["Evaluate Before You File", "Biggest Mistake in a Rush · Finding the Best Prior Art", "The provisional-vs-strategy argument, and the can opener classification-search lesson"],
+          ["What AI Gets Wrong About Your Patent", "7 ChatGPT Mistakes · The Hidden Risk of AI · Protect Your Invention Idea", "The confidentiality/disclosure/timing framing, the “AI predicts, it doesn't create” thesis, the specific ChatGPT mistakes"],
+          ["Every Business Needs a Trademark Before You Start a Patent Project", "The full patent/trademark/copyright breakdown", "Includes the Coca-Cola trademark example"]
         ]
       },
       notes: [
-        { text: "“The Rembrandt in your attic: uncovering hidden value in your business” &mdash; este es el lead magnet LM-01 del simulador de funnel.", who: "Añadida por Marcela Payares" },
-        { text: "“Why I Turn Away Patent Clients Who Actually Need a Trademark” &mdash; título candidato." },
-        { text: "Falta listar el resto de los lead magnets.", who: "Añadida por Marcela Payares" }
+        { text: "“The Rembrandt in your attic: uncovering hidden value in your business” &mdash; this is lead magnet LM-01 from the funnel simulator.", who: "Added by Marcela Payares" },
+        { text: "“Why I Turn Away Patent Clients Who Actually Need a Trademark” &mdash; candidate title." },
+        { text: "Still need to list out the rest of the lead magnets.", who: "Added by Marcela Payares" }
       ]
     },
     {
-      id: 'B', name: 'C-Suite Radio and TV Pitch', status: 'blue', statusLabel: 'Clips fuente listos',
-      tag: "Se usa internamente para presentar a Rich como invitado en los propios shows de la red.",
+      id: 'B', name: 'C-Suite Radio and TV Pitch', status: 'blue', statusLabel: 'Source clips ready',
+      tag: "Used internally to pitch Rich as a guest on the network's own shows.",
       pool: ["Rich Goldstein - All Business with Jeffrey Hayzlett Clips"],
       desc: "",
       table: null,
       notes: [
-        { text: "C-Suite Thought Summit, 13&ndash;15 nov 2026.", who: "Añadida por Marcela Payares" }
+        { text: "C-Suite Thought Summit, Nov 13&ndash;15, 2026.", who: "Added by Marcela Payares" }
       ]
     },
     {
-      id: 'C', name: 'Boardroom/Reception Scripts', status: 'blue', statusLabel: 'Clips fuente listos · 2 listos',
-      tag: "La palabra exacta del clip se convierte en el guion hablado de Rich: memorizado, no reproducido en pantalla.",
+      id: 'C', name: 'Boardroom/Reception Scripts', status: 'blue', statusLabel: 'Source clips ready · 2 ready',
+      tag: "The clip's exact wording becomes Rich's spoken script, memorized, not played on a screen.",
       pool: ["Choosing the Right Patent Attorney", "Don't Pick a Patent Attorney This Way"],
-      desc: "La cita se toma palabra por palabra hacia un guion en vivo. Sin editar el fraseo de Rich: es literalmente lo que ya dice en cámara.",
+      desc: "Quote lifted word for word into a live script. No editing of Rich's phrasing &mdash; this is literally what he already says on camera.",
       table: {
-        headers: ["Salida", "Fuente", "Duración"],
+        headers: ["Output", "Source", "Duration"],
         rows: [
           ["“Advisor, not a technician”", "Choosing Right Attorney, 00:41", "19s"],
           ["“Mostly all nonsense”", "Don't Pick Attorney, 00:00", "26s"]
         ]
       },
       notes: [
-        { text: "Ver las infografías para títulos alternativos." }
+        { text: "See the infographics for alternative titles." }
       ]
     },
     {
-      id: 'D', name: 'Infographics', status: 'amber', statusLabel: 'Primeras recomendaciones · entrega 9/21',
-      tag: "Gráficos estáticos para decks y lead magnets, construidos a partir de momentos de concepto fuerte pero video débil.",
+      id: 'D', name: 'Infographics', status: 'amber', statusLabel: 'First recommendations · delivering 9/21',
+      tag: "Static graphics for decks and lead magnets, built from strong-concept, weak-video moments.",
       pool: ["Rich's Sales Deck", "'I Let ChatGPT Build My Product'", "Episode 109 (Rembrandts)"],
-      desc: "Los datos y citas exactas se escriben en un prompt de diseño, enviado a una herramienta externa (NotebookLM) en vez de codificar el gráfico a mano, según feedback de diseño de Pete. Estado: 3 rediseñadas, calidad aprobada.",
+      desc: "Exact data and quotes written into a design prompt, sent to an external design tool (NotebookLM) instead of hand-coding the graphic, per Pete's design feedback. Status: 3 redesigned, approved-quality.",
       table: {
-        headers: ["Salida", "Fuente"],
+        headers: ["Output", "Source"],
         rows: [
-          ["What Good IP Is Worth ($30M/$35M/$60M)", "Sales Deck, láminas 17-20"],
+          ["What Good IP Is Worth ($30M/$35M/$60M)", "Sales Deck, slides 17-20"],
           ["If AI Helped You Build It, 4 questions", "'I Let ChatGPT Build My Product'"],
           ["Rembrandt in Your Attic", "Ep 109, 12:30&ndash;12:55"]
         ]
@@ -360,49 +357,49 @@
       notes: []
     },
     {
-      id: 'E', name: 'Thought Council Proposal', status: 'green', statusLabel: 'Presentado · aprobado por Jeff',
-      tag: "Evidencia para el caso de Rich ante Jeff: el podcast, el libro y 27 años de práctica.",
-      pool: ["The Hidden Risk of AI", "Creating IP Assets Parts I & II (Rich como invitado en su propio show)"],
-      desc: "Empaquetado como un reel de prueba de valor, no para publicación. Presentado a Susan Younger el 9/18, con la condición: Rich entrega valor, no vende ni hace pitch.",
+      id: 'E', name: 'Thought Council Proposal', status: 'green', statusLabel: 'Presented, approved by Jeff',
+      tag: "Evidence for Rich's case to Jeff: the podcast, the book, and 27 years of practice.",
+      pool: ["The Hidden Risk of AI", "Creating IP Assets Parts I & II (Rich as guest on his own show)"],
+      desc: "Packaged as a proof-point reel, not for publication. Presented to Susan Younger on 9/18, condition: Rich delivers value, does not pitch or sell.",
       table: {
-        headers: ["Salida", "Fuente"],
+        headers: ["Output", "Source"],
         rows: [
-          ["2 clips de 'Hidden Risk of AI'", "Patent Question"],
-          ["5 clips de 'Creating IP Assets'", "Episode 109"]
+          ["2 'Hidden Risk of AI' clips", "Patent Question"],
+          ["5 'Creating IP Assets' clips", "Episode 109"]
         ]
       },
       notes: [
-        { text: "“Board of Advisors, presentación de agosto” (o taller) &mdash; presentado, aprobado por Jeff." }
+        { text: "“Board of Advisors, August presentation” (or Workshop) &mdash; presented, approved by Jeff." }
       ]
     },
     {
-      id: 'F', name: 'Other C-Suite Boards', status: 'grey', statusLabel: 'Sin iniciar',
-      tag: "El caso se vuelve a contar como punto de discusión dentro de un board con un perfil de cliente ideal compartido.",
+      id: 'F', name: 'Other C-Suite Boards', status: 'grey', statusLabel: 'Not started',
+      tag: "The case gets retold as a discussion point inside a board with a shared ideal client profile.",
       pool: ["SaaS founder ROI story (Patent Question)", "Trademark / Coca-Cola example (Goldstein Patent Law)"],
-      desc: "Reemplazos solo-Rich para los ejemplos de invitados originales: Wayland Furniture y Spartan Race eran historias de invitados y se removieron el 9/16. Estas dos son ambas de Rich, en cámara.",
+      desc: "Rich-only replacements for the original guest examples: Wayland Furniture and Spartan Race were guest stories and were removed on 9/16. These two are both Rich, on camera.",
       table: {
-        headers: ["Board", "Salida", "Fuente"],
+        headers: ["Board", "Output", "Source"],
         rows: [
-          ["Finance / Tax and Accounting", "SaaS founder, valuación 3x en la salida", "Five Patent Mistakes, 02:45"]
+          ["Finance / Tax and Accounting", "SaaS founder, 3x exit valuation", "Five Patent Mistakes, 02:45"]
         ]
       },
       notes: [
-        { text: "Aprobado para folleto de dos páginas sobre IP para patentes, marcas y copyright.", who: "Añadida por Marcela Payares" },
-        { text: "AI Council &mdash; “¿Qué es defendible?”" }
+        { text: "Approved for two-page handout regarding IP for Patents, Trademarks and Copyrights.", who: "Added by Marcela Payares" },
+        { text: "AI Council &mdash; “What is defensible?”" }
       ]
     },
     {
-      id: 'G', name: 'Hero Club', status: 'grey', statusLabel: 'En exploración',
-      tag: "Círculo de altos ejecutivos: presentaciones y cumbres de mayor nivel.",
+      id: 'G', name: 'Hero Club', status: 'grey', statusLabel: 'Exploring',
+      tag: "The highest tier of the network: executive-level presentations and summits.",
       pool: [],
       desc: "",
       table: null,
       notes: [
-        { text: "A Jeff le gustó la presentación de Board of Advisors de agosto, quizás en vez de un taller.", who: "Añadida por Marcela Payares" },
-        { text: "The Hero CEO Summit, 15&ndash;17 nov 2026.", who: "Añadida por Marcela Payares" },
-        { text: "¿Comunidades de M&A y P/E? (¿oportunidad de canal e introducciones?)", who: "Añadida por Marcela Payares" },
-        { text: "Guest SME (FC por ejemplo).", who: "Añadida por Marcela Payares" },
-        { text: "¿Du jour? (serie de artículos, por ejemplo).", who: "Añadida por Marcela Payares" }
+        { text: "Jeff liked the Board of Advisors August presentation, perhaps instead of a workshop.", who: "Added by Marcela Payares" },
+        { text: "The Hero CEO Summit, Nov 15&ndash;17, 2026.", who: "Added by Marcela Payares" },
+        { text: "M&A and P/E communities? (Channel opportunity and introductions?)", who: "Added by Marcela Payares" },
+        { text: "Guest SME (FC for example).", who: "Added by Marcela Payares" },
+        { text: "Du jour? (article series for example).", who: "Added by Marcela Payares" }
       ]
     }
   ];
@@ -417,7 +414,7 @@
     const top = document.createElement('div');
     top.className = 'lane-top';
     top.innerHTML =
-      '<div class="lane-id-row"><span class="lane-id">LÍNEA ' + lane.id + '</span><span class="chev">&#9662;</span></div>' +
+      '<div class="lane-id-row"><span class="lane-id">LANE ' + lane.id + '</span><span class="chev">&#9662;</span></div>' +
       '<p class="lane-name">' + lane.name + '</p>' +
       '<p class="lane-tag">' + lane.tag + '</p>' +
       '<span class="status ' + statusText[lane.status] + '">' + lane.statusLabel + '</span>';
@@ -435,7 +432,7 @@
 
     if(lane.pool && lane.pool.length){
       const f = document.createElement('div'); f.className='field';
-      const l = document.createElement('div'); l.className='field-label'; l.textContent='Grupo de insumos compartido';
+      const l = document.createElement('div'); l.className='field-label'; l.textContent='Shared input pool';
       const tags = document.createElement('div'); tags.className='pool-tags';
       lane.pool.forEach(p=>{ const t=document.createElement('span'); t.className='pool-tag'; t.textContent=p; tags.appendChild(t); });
       f.appendChild(l); f.appendChild(tags); inner.appendChild(f);
@@ -443,14 +440,14 @@
 
     if(lane.desc){
       const f = document.createElement('div'); f.className='field';
-      const l = document.createElement('div'); l.className='field-label'; l.textContent='Cómo funciona';
+      const l = document.createElement('div'); l.className='field-label'; l.textContent='How it works';
       const v = document.createElement('div'); v.className='field-value soft'; v.innerHTML=lane.desc;
       f.appendChild(l); f.appendChild(v); inner.appendChild(f);
     }
 
     if(lane.table){
       const f = document.createElement('div'); f.className='field';
-      const l = document.createElement('div'); l.className='field-label'; l.textContent='Salidas';
+      const l = document.createElement('div'); l.className='field-label'; l.textContent='Outputs';
       const table = document.createElement('table'); table.className='mini';
       const thead = document.createElement('tr');
       lane.table.headers.forEach(h=>{ const th=document.createElement('th'); th.textContent=h; thead.appendChild(th); });
@@ -470,7 +467,7 @@
 
     if(lane.notes && lane.notes.length){
       const f = document.createElement('div'); f.className='field';
-      const l = document.createElement('div'); l.className='field-label'; l.textContent='Notas';
+      const l = document.createElement('div'); l.className='field-label'; l.textContent='Notes';
       const ul = document.createElement('ul'); ul.className='notes';
       lane.notes.forEach(n=>{
         const li = document.createElement('li');
