@@ -22,7 +22,7 @@
   }
   .wrap{ max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
   .site-header{ border-bottom: 1px solid var(--line); padding: 22px 0; margin-bottom: 40px; }
-  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
   .mark{ width:34px; height:34px; position:relative; flex:none; }
   .mark i{ position:absolute; width:22px; height:22px; border: 2px solid var(--gold); transform: rotate(45deg); }
   .mark i:first-child{ top:0; left:6px; }
@@ -48,13 +48,13 @@
 <body>
 <div class="wrap">
   <header class="site-header">
-    <div class="brand">
+    <a class="brand" href="./">
       <div class="mark"><i></i><i></i></div>
       <div class="wordmark">
         <div class="name">GOLDSTEIN</div>
         <div class="tag">Intellectual Property</div>
       </div>
-    </div>
+    </a>
   </header>
 
   <div class="eyebrow">Prepared by C-Suite Network</div>
