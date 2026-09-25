@@ -1,0 +1,668 @@
+<title>Goldstein Funnel Simulator</title>
+<meta name="description" content="Side by side: how Goldstein Patent Law captures an email today, and how C-Suite Network recommends doing it for the four new lead magnets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --surface:#f6f3ee;
+    --surface-2:#efebe3;
+    --line:#e3ddd0;
+    --line-strong:#cdc4b0;
+    --ink:#495059;
+    --ink-soft:#7c828c;
+    --ink-faint:#a6aab1;
+    --gold:#c8a668;
+    --gold-line:#d9c191;
+    --gold-soft: rgba(200,166,104,0.14);
+    --orange:#f78945;
+    --orange-dark:#e0722e;
+    --orange-soft: rgba(247,137,69,0.12);
+    color-scheme: light;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family:'Montserrat', ui-sans-serif, system-ui, sans-serif;
+    padding: 0 0 60px;
+  }
+  .wrap{ max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header, echoing the real site: mark + wordmark + tagline */
+  .site-header{
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    margin-bottom: 30px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .mark{ width:34px; height:34px; position:relative; flex:none; }
+  .mark i{
+    position:absolute; width:22px; height:22px;
+    border: 2px solid var(--gold);
+    transform: rotate(45deg);
+  }
+  .mark i:first-child{ top:0; left:6px; }
+  .mark i:last-child{ top:9px; left:-3px; border-color: var(--orange); opacity:.85; }
+  .wordmark{ line-height:1.15; }
+  .wordmark .name{
+    font-weight:600; font-size: 19px; letter-spacing: 2.5px; color: var(--ink);
+  }
+  .wordmark .tag{
+    font-size: 10.5px; letter-spacing: 2px; text-transform:uppercase; color: var(--ink-faint);
+  }
+
+  .intro{ margin-bottom: 26px; }
+  .eyebrow{
+    font-size: 11.5px; letter-spacing: 2px; text-transform:uppercase; color: var(--orange); font-weight:600;
+    margin-bottom: 10px;
+  }
+  h1{
+    font-family:'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height:1.18;
+    color: var(--ink);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .sub{ color: var(--ink-soft); font-size: 14.5px; line-height:1.65; max-width: 66ch; margin:0; }
+  .sub b{ color: var(--ink); font-weight:600; }
+
+  /* Tabs */
+  .tabs{
+    display:flex; gap: 4px; margin: 28px 0 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab{
+    font-family:'Montserrat', sans-serif;
+    font-size: 13.5px; font-weight:600; letter-spacing:.3px;
+    color: var(--ink-soft);
+    background:none; border:none;
+    padding: 12px 4px; margin-right: 28px;
+    cursor:pointer;
+    border-bottom: 2px solid transparent;
+    position:relative; top:1px;
+  }
+  .tab .n{
+    display:inline-block; font-size:10.5px; letter-spacing:1px;
+    color: var(--ink-faint); margin-right:7px;
+  }
+  .tab.active{ color: var(--ink); border-bottom-color: var(--orange); }
+  .tab.active .n{ color: var(--orange); }
+  .tab:hover{ color: var(--ink); }
+
+  [hidden]{ display:none !important; }
+
+  /* Stage layout, shared */
+  .stage{ display:grid; grid-template-columns: minmax(0,1fr) 300px; gap: 26px; align-items:start; }
+  @media (max-width: 860px){ .stage{ grid-template-columns: 1fr; } }
+
+  .device{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 50px -30px rgba(60,50,30,0.35);
+  }
+  .device-bar{
+    display:flex; align-items:center; gap:7px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+  .device-bar .dot{ width:8px; height:8px; border-radius:50%; background: var(--line-strong); }
+  .device-bar .url{ margin-left: 8px; }
+  .screen{
+    padding: 34px clamp(20px,4vw,48px) 40px;
+    min-height: 400px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+
+  /* Rack (recommended lead magnet picker) */
+  .rack{ display:grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 20px; }
+  @media (max-width:760px){ .rack{ grid-template-columns: repeat(2,1fr);} }
+  .card-tab{
+    text-align:left; background: var(--surface); border: 1px solid var(--line);
+    padding: 13px 14px 11px; cursor:pointer; color: var(--ink); font-family:inherit;
+    transition: border-color .15s ease, background .15s ease; position:relative;
+  }
+  .card-tab:hover{ border-color: var(--line-strong); }
+  .card-tab .code{ font-family: ui-monospace, monospace; font-size:10px; letter-spacing:1px; color: var(--ink-faint); }
+  .card-tab .name{ font-weight:600; font-size:14.5px; margin-top:5px; line-height:1.3; }
+  .card-tab.active{ background: var(--orange-soft); border-color: var(--orange); }
+  .card-tab.active .code{ color: var(--orange-dark); }
+
+  .tagline{ font-size: 11px; letter-spacing:1.5px; text-transform:uppercase; color: var(--orange-dark); font-weight:600; margin-bottom: 14px; }
+  .q-text{
+    font-family:'Montserrat', sans-serif; font-weight:400;
+    font-size: clamp(18px, 2.4vw, 23px); line-height:1.4; color: var(--ink);
+    margin: 0 0 24px; max-width: 46ch;
+  }
+  .options{ display:flex; flex-direction:column; gap:9px; max-width: 460px; }
+  .opt{
+    text-align:left; background: var(--paper); border: 1px solid var(--line-strong);
+    color: var(--ink); font-family:'Montserrat',sans-serif; font-weight:500; font-size:14px;
+    padding: 12px 16px; cursor:pointer; transition: border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{ border-color: var(--orange); background: var(--orange-soft); }
+
+  .gate-input{ display:flex; gap:10px; max-width: 440px; flex-wrap:wrap; }
+  input[type=email], input[type=text]{
+    flex: 1 1 190px; background: var(--paper); border: 1px solid var(--line-strong);
+    color: var(--ink); font-family:'Montserrat',sans-serif; font-size:14px;
+    padding: 12px 14px;
+  }
+  input::placeholder{ color: var(--ink-faint); }
+  input:focus{ outline:2px solid var(--orange); outline-offset:1px; }
+
+  .btn{
+    font-family:'Montserrat', sans-serif; font-weight:700; font-size: 13px; letter-spacing:.4px;
+    color:#fff; background: var(--orange); border:none; padding: 13px 22px; cursor:pointer;
+    text-transform:uppercase; white-space:nowrap;
+  }
+  .btn:hover{ background: var(--orange-dark); }
+  .btn.block{ width:100%; text-align:center; }
+  .btn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+  .result-badge{
+    display:inline-block; font-family: ui-monospace, monospace; font-size:11px; letter-spacing:1px;
+    text-transform:uppercase; color: var(--orange-dark); border:1px solid var(--orange); background: var(--orange-soft);
+    padding: 5px 10px; margin-bottom:16px;
+  }
+  .result-title{ font-family:'Montserrat',sans-serif; font-weight:600; font-size: clamp(19px,2.4vw,24px); margin:0 0 16px; }
+  .result-body{ color: var(--ink-soft); font-size:14.5px; line-height:1.65; max-width:50ch; margin:0 0 20px; }
+  .result-body.diag{ color: var(--ink); font-weight:500; background: var(--surface); border-left:3px solid var(--orange); padding: 14px 16px; max-width:56ch; }
+
+  .findings{ display:flex; flex-direction:column; gap:12px; margin: 0 0 22px; max-width: 56ch; }
+  .finding{ display:flex; gap:12px; align-items:flex-start; }
+  .finding .f-icon{
+    flex:none; width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; margin-top:1px;
+    background: var(--surface-2); color: var(--ink-faint);
+  }
+  .finding.flagged .f-icon{ background: var(--orange); color:#fff; }
+  .finding .f-text{ display:flex; flex-direction:column; gap:2px; }
+  .finding .f-text b{ font-size:13.5px; color: var(--ink); }
+  .finding .f-text span{ font-size:13px; color: var(--ink-soft); line-height:1.5; }
+  .finding:not(.flagged) .f-text b{ color: var(--ink-faint); }
+  .finding:not(.flagged) .f-text span{ color: var(--ink-faint); }
+
+  .why-call{
+    max-width: 56ch; margin: 0 0 22px;
+    border: 1px solid var(--line); background: var(--paper);
+  }
+  .why-title{
+    font-size: 11px; letter-spacing: 1.5px; text-transform:uppercase; font-weight:700;
+    color: var(--ink); background: var(--surface);
+    padding: 10px 16px; border-bottom: 1px solid var(--line);
+  }
+  .why-call ul{ margin:0; padding: 12px 16px 14px 34px; list-style: none; }
+  .why-call li{ position:relative; font-size:13.5px; color: var(--ink-soft); line-height:1.55; margin-bottom:9px; }
+  .why-call li:last-child{ margin-bottom:0; }
+  .why-call li::before{
+    content:"\2192"; position:absolute; left:-22px; top:0; color: var(--orange); font-weight:700;
+  }
+  .restart{ background:none; border:none; color: var(--ink-soft); font-size:12px; text-decoration:underline; cursor:pointer; padding:0; margin-top:18px; align-self:flex-start; font-family:'Montserrat',sans-serif; }
+
+  .progress{ display:flex; gap:6px; padding: 15px clamp(20px,4vw,48px) 0; }
+  .progress i{ height:3px; flex:1; background: var(--line); display:block; }
+  .progress i.done{ background: var(--orange); }
+
+  /* Today-view specific */
+  .today-hero{ position:relative; background:#2c2a28; color:#fff; padding: 34px 30px; text-align:center; }
+  .today-hero .kicker{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#f3c79a; margin-bottom:10px; }
+  .today-hero h2{ font-family:'Montserrat',sans-serif; font-weight:300; font-size: clamp(22px,3vw,30px); margin:0 0 8px; }
+  .today-hero p{ color:#d8d3cb; font-size:13.5px; max-width:46ch; margin:0 auto; }
+  .today-body{ padding: 30px clamp(20px,4vw,44px) 36px; }
+  .today-body p{ font-size:14px; line-height:1.7; color: var(--ink-soft); margin: 0 0 16px; max-width: 56ch; }
+  .today-body .ask{ font-weight:700; color: var(--ink); font-size:14.5px; margin-bottom:14px; }
+  .confirm{ text-align:center; padding: 50px 20px; }
+  .confirm .big{ font-size:38px; margin-bottom:14px; }
+  .confirm h3{ font-family:'Montserrat',sans-serif; font-weight:600; font-size:20px; margin:0 0 10px; }
+  .confirm p{ color: var(--ink-soft); font-size:13.5px; max-width:40ch; margin:0 auto; }
+
+  /* Rail */
+  .rail{ background: var(--surface); border: 1px solid var(--line); padding: 22px 20px; }
+  .rail h2{ font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color: var(--ink-soft); margin:0 0 18px; font-weight:700; }
+  .steps{ position:relative; margin:0; padding:0; list-style:none; }
+  .steps li{ position:relative; padding: 0 0 24px 26px; font-size:13px; color: var(--ink-soft); }
+  .steps li:last-child{ padding-bottom:0; }
+  .steps li::before{ content:""; position:absolute; left:0; top:3px; width:11px; height:11px; border-radius:50%; border:2px solid var(--line-strong); background: var(--paper); }
+  .steps li::after{ content:""; position:absolute; left:5px; top:14px; bottom:0; width:1px; background: var(--line); }
+  .steps li:last-child::after{ display:none; }
+  .steps li b{ display:block; color: var(--ink); font-weight:700; font-size:13.5px; margin-bottom:2px; }
+  .steps li.active{ color: var(--ink); }
+  .steps li.active::before{ border-color: var(--orange); background: var(--orange); }
+  .steps li.active::after{ background: var(--orange); }
+  .steps li.done::before{ border-color: var(--orange); background: var(--orange-soft); }
+  .steps li.done::after{ background: var(--gold-line); }
+  .rail.friction .steps li::before{ border-color:#c98a5a; }
+  .rail.friction .steps li.now::before{ border-color:#c0432b; background:#c0432b; }
+  .rail.friction .steps li.now{ color: var(--ink); }
+
+  .verdict{ margin-top: 22px; border-top:1px solid var(--line); padding-top:16px; font-size:12.5px; color: var(--ink-soft); line-height:1.6; }
+  .verdict b{ color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <header class="site-header">
+    <div class="brand">
+      <div class="mark"><i></i><i></i></div>
+      <div class="wordmark">
+        <div class="name">GOLDSTEIN</div>
+        <div class="tag">Intellectual Property</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="intro">
+    <div class="eyebrow">Funnel Simulator &middot; Prepared by C-Suite Network</div>
+    <h1>Two ways to turn a website visitor into a lead.</h1>
+    <p class="sub">The tabs below run the same visitor through both models. <b>Today</b> is the live mechanic on goldsteinpatentlaw.com right now. <b>C-Suite Recommendation</b> is the model proposed for the four new lead magnets.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="tabToday"><span class="n">01</span>How It Works Today</button>
+    <button class="tab" id="tabRecommended"><span class="n">02</span>C-Suite Network's Recommendation</button>
+  </div>
+
+  <!-- TODAY VIEW -->
+  <div id="viewToday">
+    <div class="stage">
+      <div class="device">
+        <div class="device-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">goldsteinpatentlaw.com/get-profit-from-your-patent</span></div>
+        <div id="todayScreen"></div>
+      </div>
+      <div class="rail friction">
+        <h2>What this asks of a visitor</h2>
+        <ol class="steps" id="todaySteps">
+          <li data-s="0"><b>Read the pitch</b>A long, single page makes the case before asking for anything.</li>
+          <li data-s="1"><b>Give your email first</b>Name and email are required before any value is delivered.</li>
+          <li data-s="2"><b>Wait for it to arrive</b>The booklet is sent afterward. Nothing shows on screen.</li>
+        </ol>
+        <div class="verdict"><b>The friction point:</b> a cold visitor has to trust Rich enough to hand over their email before they've received anything at all. That is a big ask on a first visit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED VIEW -->
+  <div id="viewRecommended" hidden>
+    <div class="rack" id="rack"></div>
+    <div class="stage">
+      <div class="device">
+        <div class="device-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url" id="deviceUrl">goldsteinpatentlaw.com/rembrandt</span></div>
+        <div class="progress" id="progress"></div>
+        <div class="screen" id="screen"></div>
+      </div>
+      <div class="rail">
+        <h2>Why this converts better</h2>
+        <ol class="steps" id="steps">
+          <li data-step="quiz"><b>Land &amp; answer</b>No email required. The visitor answers because the question is about them.</li>
+          <li data-step="gate"><b>Unlock the result</b>The email is asked for once, right when curiosity is highest.</li>
+          <li data-step="result"><b>See it instantly</b>The personal result shows on screen immediately, plus one next step.</li>
+          <li data-step="nurture"><b>Enter the nurture</b>A copy is emailed automatically into the existing GoHighLevel sequence.</li>
+        </ol>
+        <div class="verdict"><b>The difference:</b> the visitor invests 60&ndash;90 seconds before the email is ever asked for, so the ask lands after curiosity has already been earned, not before.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---------- Tabs ---------- */
+  const tabToday = document.getElementById('tabToday');
+  const tabRec = document.getElementById('tabRecommended');
+  const viewToday = document.getElementById('viewToday');
+  const viewRec = document.getElementById('viewRecommended');
+  tabToday.addEventListener('click', ()=>{
+    tabToday.classList.add('active'); tabRec.classList.remove('active');
+    viewToday.hidden = false; viewRec.hidden = true;
+  });
+  tabRec.addEventListener('click', ()=>{
+    tabRec.classList.add('active'); tabToday.classList.remove('active');
+    viewRec.hidden = false; viewToday.hidden = true;
+  });
+
+  /* ---------- Today view (real current mechanic) ---------- */
+  const todayScreen = document.getElementById('todaySteps');
+  const screenEl = document.getElementById('todayScreen');
+  let todayStep = 0;
+
+  function markTodaySteps(i){
+    document.querySelectorAll('#todaySteps li').forEach(li=>{
+      const s = Number(li.getAttribute('data-s'));
+      li.classList.remove('now','done');
+      if(s < i) li.classList.add('done');
+      if(s === i) li.classList.add('now');
+    });
+  }
+
+  function renderToday(){
+    markTodaySteps(todayStep);
+    screenEl.innerHTML = '';
+    if(todayStep === 0){
+      const hero = document.createElement('div');
+      hero.className = 'today-hero';
+      hero.innerHTML = '<div class="kicker">Attention: Inventors, Entrepreneurs, and Business Owners</div><h2>Profit From Your Patent</h2><p>How to make money with, profit from, and recoup your patent investment. A no cost, no obligation booklet.</p>';
+      const body = document.createElement('div');
+      body.className = 'today-body';
+      body.innerHTML = '<p>Securing a patent is not the biggest issue inventors face. It is finding a way to monetize their patent. This twenty minute read could be worth millions.</p>';
+      const btn = document.createElement('button');
+      btn.className = 'btn'; btn.textContent = 'Click Here For Complimentary Access »';
+      btn.addEventListener('click', ()=>{ todayStep = 1; renderToday(); });
+      body.appendChild(btn);
+      screenEl.appendChild(hero); screenEl.appendChild(body);
+    } else if(todayStep === 1){
+      const body = document.createElement('div');
+      body.className = 'today-body';
+      body.innerHTML = '<p class="ask">Where would you like us to send Profit From Your Patent?</p>';
+      const form = document.createElement('div');
+      form.style.display='flex'; form.style.flexDirection='column'; form.style.gap='10px'; form.style.maxWidth='360px';
+      const name = document.createElement('input'); name.type='text'; name.placeholder='Type your First Name here'; name.id='todayName';
+      const email = document.createElement('input'); email.type='email'; email.placeholder='Type your primary Email here'; email.id='todayEmail';
+      const btn = document.createElement('button'); btn.className='btn block'; btn.textContent='Send Me Profit From Your Patent Now';
+      btn.addEventListener('click', ()=>{ todayStep = 2; renderToday(); });
+      form.appendChild(name); form.appendChild(email); form.appendChild(btn);
+      body.appendChild(form);
+      screenEl.appendChild(body);
+    } else {
+      const c = document.createElement('div');
+      c.className = 'confirm';
+      c.innerHTML = '<div class="big">✉️</div><h3>Thanks! Check your email.</h3><p>Profit From Your Patent is on its way to your inbox. Nothing appears on screen, so there is nothing to see here yet.</p>';
+      const restart = document.createElement('button');
+      restart.className='restart'; restart.textContent='← Start over'; restart.style.display='block'; restart.style.margin='18px auto 0';
+      restart.addEventListener('click', ()=>{ todayStep = 0; renderToday(); });
+      c.appendChild(restart);
+      screenEl.appendChild(c);
+    }
+  }
+  renderToday();
+
+  /* ---------- Recommended view (quiz funnel) ---------- */
+  const QUIZZES = [
+    {
+      id:'rembrandt', code:'LM-01', name:'Rembrandt in Your Attic',
+      url:'goldsteinpatentlaw.com/rembrandt',
+      tag:'The hidden asset test',
+      questions:[
+        {key:"Process & method", text:"Do you have a way of doing something, a process or method, that took real trial and error to get right, and that a competitor couldn't simply copy by watching you for a day?", options:[
+          ["Yes",{v:1, ok:true, note:"That's a trade secret candidate, and possibly a method patent, since it's a specific way of doing something, not just experience."}],
+          ["No",{v:0, ok:false, note:"Nothing unusual flagged here."}],
+        ]},
+        {key:"Product design", text:"Does your product or service have a specific feature, shape, or design element that customers associate specifically with you?", options:[
+          ["Yes",{v:1, ok:true, note:"That distinctive feature is a design patent candidate, worth checking before someone else files it first."}],
+          ["No",{v:0, ok:false, note:"Nothing unusual flagged here."}],
+        ]},
+        {key:"Brand recognition", text:"Do customers recognize your name, logo, tagline, or a specific phrase you use, well enough that a copy of it would confuse them?", options:[
+          ["Yes",{v:1, ok:true, note:"That's trademark territory. If it isn't registered yet, it's currently unprotected even though customers already treat it as yours."}],
+          ["No",{v:0, ok:false, note:"Nothing unusual flagged here."}],
+        ]},
+        {key:"Internal tools", text:"Have you built a tool, system, or piece of software internally that makes your business run better than a typical competitor's?", options:[
+          ["Yes",{v:1, ok:true, note:"An internal tool like that can be defensible IP, and sometimes even licensable to others in your industry."}],
+          ["No",{v:0, ok:false, note:"Nothing unusual flagged here."}],
+        ]},
+        {key:"Original content", text:"Have you created original content, training material, or a framework that took real time and expertise to develop?", options:[
+          ["Yes",{v:1, ok:true, note:"Original frameworks and training material are copyrightable by default, but most businesses never register them, which weakens enforcement."}],
+          ["No",{v:0, ok:false, note:"Nothing unusual flagged here."}],
+        ]},
+      ],
+      diagnosis(total, found){
+        if(total<=1) return "Based on your answers, you don't have much sitting unprotected right now, but it's worth a fifteen minute check to be sure nothing was missed.";
+        if(total<=3) return "Based on your answers, you're likely sitting on "+found+" unprotected assets. The strategy call is where we figure out which ones are worth acting on first.";
+        return "Based on your answers, you're sitting on real, valuable IP across "+found+" different areas that has never been formally protected. That's a bigger gap than most businesses your size have.";
+      },
+      callReasons:[
+        "Which of these findings actually qualify for protection, and which type: patent, trademark, or copyright.",
+        "What protecting the highest value one first would realistically cost and take.",
+        "What's safe to leave alone for now versus what's exposed today.",
+      ],
+      cta:"Book Your Free Strategy Call"
+    },
+    {
+      id:'leverage', code:'LM-02', name:'The IP Leverage Score',
+      url:'goldsteinpatentlaw.com/leverage-score',
+      tag:'How exposed are you, right now',
+      questions:[
+        {key:"Competitive impact", text:"If your biggest competitor copied your product, process, or brand tomorrow, how much would it actually hurt your business?", options:[
+          ["Barely",{v:0, ok:false, note:"Low competitive exposure on this front."}],
+          ["It would sting",{v:1, ok:true, note:"Real competitive exposure. Losing this would cost you customers or margin."}],
+          ["It could be fatal",{v:2, ok:true, note:"This is your single biggest vulnerability. Losing it would be existential, not just annoying."}],
+        ]},
+        {key:"Unauthorized use", text:"Has anyone, a customer, a competitor, or even an AI tool, ever used something you created without giving you credit or paying for it?", options:[
+          ["No, not that I know of",{v:0, ok:false, note:"No signs of unauthorized use right now."}],
+          ["Maybe, I'm not sure",{v:1, ok:true, note:"Worth investigating properly. \"Maybe\" usually means it's happening and hasn't been caught yet."}],
+          ["Yes, it's happened",{v:2, ok:true, note:"Confirmed unauthorized use. This may already be a live infringement issue, not just a future risk."}],
+        ]},
+        {key:"Investor readiness", text:"If an investor or acquirer looked closely at your business today, would they find your key advantages locked down, or wide open?", options:[
+          ["Locked down",{v:0, ok:false, note:"Your advantages are documented and defensible."}],
+          ["Somewhere in between",{v:1, ok:true, note:"Partial documentation. Real gaps are likely to surface under scrutiny."}],
+          ["Wide open",{v:2, ok:true, note:"Nothing here is documented. This is exactly what due diligence finds first, and it lowers what buyers or investors will offer."}],
+        ]},
+      ],
+      diagnosis(total, found){
+        if(total<=1) return "Based on your answers, your edge looks reasonably locked down. A short review would confirm there's no gap you've missed.";
+        if(total<=4) return "Based on your answers, part of what makes you different is already open to anyone who looks closely, whether that's a competitor, an investor, or a partner.";
+        return "Based on your answers, most of what makes you different is currently unprotected. This is the largest lever available to you right now, whether or not you ever sell or raise money.";
+      },
+      callReasons:[
+        "Which exposure to close first, based on what would actually hurt you most.",
+        "What closing it would cost, versus what it's already putting at risk.",
+        "How much protecting it could move your valuation or your leverage in a deal.",
+      ],
+      cta:"Get Your Free IP Leverage Score"
+    },
+    {
+      id:'ai', code:'LM-03', name:'Is Your AI Habit Leaking It?',
+      url:'goldsteinpatentlaw.com/ai-risk-check',
+      tag:'A 90 second check before your next prompt',
+      questions:[
+        {key:"Technical disclosure", text:"Have you ever pasted the specific, technical details of how your product or invention works into a chatbot?", options:[
+          ["Yes",{v:1, ok:true, note:"You've put technical details into a chat log that isn't confidential or privileged. That's a disclosure, whether you meant it as one or not."}],
+          ["No",{v:0, ok:false, note:"No technical disclosure flagged here."}],
+        ]},
+        {key:"AI-drafted filing", text:"Have you asked an AI tool to draft any part of an actual patent application, proposal, or pitch using your real invention details?", options:[
+          ["Yes",{v:1, ok:true, note:"An AI-drafted filing can include language pulled from other sources, which means you may not actually own every word in it."}],
+          ["No",{v:0, ok:false, note:"No AI-drafted filings flagged here."}],
+        ]},
+        {key:"Data policy", text:"Do you know, for certain, what happens to the information you type into the AI tools you use most?", options:[
+          ["No idea",{v:1, ok:true, note:"You don't know if your inputs are stored or used to train future models. That stays an open exposure until you actually check the terms."}],
+          ["Yes, I know",{v:0, ok:false, note:"You've confirmed your data policy. Good."}],
+        ]},
+        {key:"Unverified AI output", text:"Have you used AI to name, describe, or design something you plan to build a business around, without checking whether that output is actually yours to use?", options:[
+          ["Yes",{v:1, ok:true, note:"AI-generated names, designs, or descriptions carry unclear ownership until you confirm the rights are actually yours."}],
+          ["No",{v:0, ok:false, note:"No unverified AI output flagged here."}],
+        ]},
+      ],
+      diagnosis(total, found){
+        if(total===0) return "Based on your answers, you're already ahead of most founders using AI today. Keep it that way.";
+        if(total<=2) return "Based on your answers, you have "+found+" specific habit worth closing before it becomes a real problem.";
+        return "Based on your answers, you may have already disclosed more than you realize across "+found+" different habits. Timing matters here, so don't wait to find out what's still safe to protect.";
+      },
+      callReasons:[
+        "Exactly what you've already put into AI tools, and whether any of it counts as a disclosure.",
+        "What's still safe to protect, and how much time you realistically have left to do it.",
+        "How to keep using AI to build faster without giving away the parts that make it yours.",
+      ],
+      cta:"Book Your Free Strategy Call"
+    },
+    {
+      id:'trademark', code:'LM-04', name:'Patent or Trademark?',
+      url:'goldsteinpatentlaw.com/patent-or-trademark',
+      tag:'The 2 minute test',
+      questions:[
+        {text:"If a competitor copied you tomorrow, what would actually hurt your business more?", options:[
+          ["They copied exactly how your product works, the mechanism or the process.",{v:"A"}],
+          ["They copied your name, your logo, or the thing customers ask for by name.",{v:"B"}],
+          ["Honestly, both feel important.",{v:"C"}],
+        ]},
+      ],
+      score(answer){
+        if(answer==="A") return {badge:"Mostly A", title:"You're likely in patent territory", body:"You are likely protecting how something works, the mechanism or the process itself. A patent conversation, not a trademark one, is the right starting point.", callReasons:[
+          "Whether what you built actually qualifies as patentable, before you spend a dollar filing.",
+          "Whether a proper search turns up something too close to yours, using classification search, not just keywords.",
+          "What order to file in, if more than one type of protection applies.",
+        ]};
+        if(answer==="B") return {badge:"Mostly B", title:"You're likely in trademark territory", body:"You are likely protecting what customers already recognize and trust: your name, your look, or your reputation. That's a trademark conversation, not a patent one.", callReasons:[
+          "Whether your name or mark is actually registrable, and whether something too similar already exists.",
+          "What classes to register under so you're actually covered where it matters.",
+          "What to do if you find out someone is already using something close to it.",
+        ]};
+        return {badge:"It's C", title:"The most common answer", body:"Most businesses actually need both, at different points as they grow. The five minute version of this is having someone look at your specific business and tell you which one comes first.", callReasons:[
+          "Which one actually comes first for your specific business, patent or trademark.",
+          "What it would cost to do both, and in what order, versus doing just one now.",
+          "What's urgent because a clock is already running, versus what can wait.",
+        ]};
+      },
+      cta:"Book Your Free Strategy Call"
+    },
+  ];
+
+  let quizIndex = 0, qIndex = 0, answers = [];
+  const rack = document.getElementById('rack');
+  const screen = document.getElementById('screen');
+  const progress = document.getElementById('progress');
+  const deviceUrl = document.getElementById('deviceUrl');
+  const stepsEls = Array.from(document.querySelectorAll('#steps li'));
+
+  function buildRack(){
+    rack.innerHTML = '';
+    QUIZZES.forEach((q, i)=>{
+      const b = document.createElement('button');
+      b.className = 'card-tab' + (i===quizIndex ? ' active' : '');
+      b.innerHTML = '<div class="code">'+q.code+'</div><div class="name">'+q.name+'</div>';
+      b.addEventListener('click', ()=>{ quizIndex=i; qIndex=0; answers=[]; render(); });
+      rack.appendChild(b);
+    });
+  }
+
+  function setRailStep(stepName){
+    const order = ['quiz','gate','result','nurture'];
+    const cur = order.indexOf(stepName);
+    stepsEls.forEach(li=>{
+      const mine = order.indexOf(li.getAttribute('data-step'));
+      li.classList.remove('active','done');
+      if(mine < cur) li.classList.add('done');
+      if(mine === cur) li.classList.add('active');
+    });
+  }
+
+  function renderProgress(total, current){
+    progress.innerHTML='';
+    for(let i=0;i<total;i++){
+      const el = document.createElement('i');
+      if(i < current) el.classList.add('done');
+      progress.appendChild(el);
+    }
+  }
+
+  function render(){
+    buildRack();
+    const quiz = QUIZZES[quizIndex];
+    deviceUrl.textContent = quiz.url;
+
+    if(qIndex < quiz.questions.length){
+      setRailStep('quiz');
+      renderProgress(quiz.questions.length + 1, qIndex);
+      const q = quiz.questions[qIndex];
+      screen.innerHTML = '';
+      const tag = document.createElement('div');
+      tag.className='tagline';
+      tag.textContent = quiz.tag + ' · question ' + (qIndex+1) + ' of ' + quiz.questions.length;
+      const qt = document.createElement('p');
+      qt.className='q-text'; qt.textContent = q.text;
+      const opts = document.createElement('div'); opts.className='options';
+      q.options.forEach(([label,meta])=>{
+        const btn = document.createElement('button');
+        btn.className='opt'; btn.textContent = label;
+        btn.addEventListener('click', ()=>{ answers.push(Object.assign({label:label, key:q.key}, meta)); qIndex++; render(); });
+        opts.appendChild(btn);
+      });
+      screen.appendChild(tag); screen.appendChild(qt); screen.appendChild(opts);
+      return;
+    }
+
+    if(!answers.__gated){
+      setRailStep('gate');
+      renderProgress(quiz.questions.length + 1, quiz.questions.length);
+      screen.innerHTML='';
+      const tag = document.createElement('div'); tag.className='tagline'; tag.textContent = 'one step left';
+      const qt = document.createElement('p'); qt.className='q-text';
+      qt.textContent = quiz.id==='leverage' ? "Enter your email to see your IP Leverage Score." : (quiz.id==='trademark' ? "Enter your email to see which conversation you're in." : "Enter your email to see your result.");
+      const form = document.createElement('div'); form.className='gate-input';
+      const input = document.createElement('input'); input.type='email'; input.placeholder='you@company.com'; input.id='gateEmail';
+      const btn = document.createElement('button'); btn.className='btn'; btn.textContent='See My Result →';
+      btn.addEventListener('click', ()=>{ answers.__gated = true; render(); });
+      form.appendChild(input); form.appendChild(btn);
+      screen.appendChild(tag); screen.appendChild(qt); screen.appendChild(form);
+      return;
+    }
+
+    setRailStep('result');
+    renderProgress(quiz.questions.length + 1, quiz.questions.length + 1);
+    screen.innerHTML='';
+
+    if(quiz.id === 'trademark'){
+      const total = answers[0].v;
+      const r = quiz.score(total);
+      const badge = document.createElement('span'); badge.className='result-badge'; badge.textContent = r.badge;
+      const title = document.createElement('h3'); title.className='result-title'; title.textContent = r.title;
+      const body = document.createElement('p'); body.className='result-body'; body.textContent = r.body;
+      const why = buildWhySection(r.callReasons);
+      const cta = document.createElement('button'); cta.className='btn'; cta.textContent = quiz.cta;
+      const restart = document.createElement('button'); restart.className='restart'; restart.textContent='← Try another lead magnet';
+      restart.addEventListener('click', ()=>{ qIndex=0; answers=[]; render(); });
+      screen.appendChild(badge); screen.appendChild(title); screen.appendChild(body); screen.appendChild(why); screen.appendChild(cta); screen.appendChild(restart);
+      setTimeout(()=>setRailStep('nurture'), 900);
+      return;
+    }
+
+    const total = answers.reduce((a,x)=>a+(x.v||0),0);
+    const found = answers.filter(x=>x.ok).length;
+    const diagText = quiz.diagnosis(total, found);
+
+    const badge = document.createElement('span'); badge.className='result-badge'; badge.textContent = found+' of '+answers.length+' flagged';
+    const title = document.createElement('h3'); title.className='result-title'; title.textContent = 'Your results, question by question';
+
+    const list = document.createElement('div'); list.className='findings';
+    answers.forEach(a=>{
+      const row = document.createElement('div');
+      row.className = 'finding' + (a.ok ? ' flagged' : '');
+      const icon = document.createElement('span'); icon.className='f-icon'; icon.textContent = a.ok ? '✓' : '–';
+      const text = document.createElement('div'); text.className='f-text';
+      const k = document.createElement('b'); k.textContent = a.key;
+      const n = document.createElement('span'); n.textContent = a.note;
+      text.appendChild(k); text.appendChild(n);
+      row.appendChild(icon); row.appendChild(text);
+      list.appendChild(row);
+    });
+
+    const diag = document.createElement('p'); diag.className='result-body diag'; diag.textContent = diagText;
+    const why = buildWhySection(quiz.callReasons);
+    const cta = document.createElement('button'); cta.className='btn'; cta.textContent = quiz.cta;
+    const restart = document.createElement('button'); restart.className='restart'; restart.textContent='← Try another lead magnet';
+    restart.addEventListener('click', ()=>{ qIndex=0; answers=[]; render(); });
+
+    screen.appendChild(badge); screen.appendChild(title); screen.appendChild(list); screen.appendChild(diag); screen.appendChild(why); screen.appendChild(cta); screen.appendChild(restart);
+    setTimeout(()=>setRailStep('nurture'), 900);
+  }
+
+  function buildWhySection(reasons){
+    const wrap = document.createElement('div'); wrap.className = 'why-call';
+    const h = document.createElement('div'); h.className = 'why-title'; h.textContent = "What the call actually covers";
+    wrap.appendChild(h);
+    const ul = document.createElement('ul');
+    (reasons || []).forEach(r=>{
+      const li = document.createElement('li'); li.textContent = r; ul.appendChild(li);
+    });
+    wrap.appendChild(ul);
+    return wrap;
+  }
+  render();
+})();
+</script>
