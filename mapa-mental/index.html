@@ -124,7 +124,7 @@
 
   /* ---------- Lane cards ---------- */
   .lanes{
-    display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr));
     gap: 16px;
   }
   .lane{
@@ -487,7 +487,17 @@
       const l = document.createElement('div'); l.className='field-label'; l.textContent='Outputs';
       const table = document.createElement('table'); table.className='mini';
       const thead = document.createElement('tr');
-      lane.table.headers.forEach(h=>{ const th=document.createElement('th'); th.textContent=h; thead.appendChild(th); });
+      // Give the last column (usually the longest text) the most room instead of
+      // splitting evenly, so long phrases don't get squeezed into ugly mid-word breaks.
+      const colCount = lane.table.headers.length;
+      const colWidths = colCount === 2 ? ['36%','64%']
+        : colCount === 3 ? ['22%','28%','50%']
+        : null;
+      lane.table.headers.forEach((h,i)=>{
+        const th=document.createElement('th'); th.textContent=h;
+        if(colWidths){ th.style.width = colWidths[i]; }
+        thead.appendChild(th);
+      });
       table.appendChild(thead);
       lane.table.rows.forEach(row=>{
         const tr = document.createElement('tr');
