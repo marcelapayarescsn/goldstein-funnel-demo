@@ -176,6 +176,19 @@
     padding: 4px 9px; color: var(--ink); line-height:1.4;
   }
 
+  .infographics{ display:flex; gap:14px; flex-wrap:wrap; }
+  .infographic{ width: 130px; flex:none; text-decoration:none; color:inherit; display:block; }
+  .infographic .thumb{
+    width:100%; aspect-ratio: 889 / 2000; overflow:hidden;
+    border:1px solid var(--line); background: var(--surface);
+    box-shadow: 0 10px 24px -16px rgba(60,50,30,0.35);
+    transition: border-color .15s ease;
+  }
+  .infographic .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .infographic:hover .thumb{ border-color: var(--orange); }
+  .infographic span{ display:block; font-size:11px; color: var(--ink-soft); margin-top:7px; line-height:1.4; }
+  .infographic:hover span{ color: var(--orange-dark); }
+
   table.mini{ width:100%; border-collapse:collapse; font-size:12px; }
   table.mini th{
     text-align:left; font-size:10px; letter-spacing:1px; text-transform:uppercase;
@@ -354,6 +367,11 @@
           ["Rembrandt in Your Attic", "Ep 109, 12:30&ndash;12:55"]
         ]
       },
+      images: [
+        { src: "images/what-good-ip-is-worth.png", caption: "What Good IP Is Worth When You Exit Your Business" },
+        { src: "images/if-ai-helped-you-build-it.png", caption: "If AI Helped You Build It, What Do You Actually Own?" },
+        { src: "images/rembrandt-in-your-attic.png", caption: "There May Be a Rembrandt In Your Attic" }
+      ],
       notes: []
     },
     {
@@ -443,6 +461,22 @@
       const l = document.createElement('div'); l.className='field-label'; l.textContent='How it works';
       const v = document.createElement('div'); v.className='field-value soft'; v.innerHTML=lane.desc;
       f.appendChild(l); f.appendChild(v); inner.appendChild(f);
+    }
+
+    if(lane.images && lane.images.length){
+      const f = document.createElement('div'); f.className='field';
+      const l = document.createElement('div'); l.className='field-label'; l.textContent='Infographics';
+      const grid = document.createElement('div'); grid.className='infographics';
+      lane.images.forEach(img=>{
+        const a = document.createElement('a'); a.className='infographic'; a.href=img.src; a.target='_blank'; a.rel='noopener';
+        const thumb = document.createElement('div'); thumb.className='thumb';
+        const im = document.createElement('img'); im.src = img.src; im.alt = img.caption; im.loading='lazy';
+        thumb.appendChild(im);
+        const cap = document.createElement('span'); cap.textContent = img.caption;
+        a.appendChild(thumb); a.appendChild(cap);
+        grid.appendChild(a);
+      });
+      f.appendChild(l); f.appendChild(grid); inner.appendChild(f);
     }
 
     if(lane.table){
