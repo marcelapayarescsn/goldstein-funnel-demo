@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goldstein Patent Law · Demos</title>
+<meta name="description" content="Índice de páginas de demostración preparadas por C-Suite Network para Goldstein Patent Law.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff; --surface:#f6f3ee; --line:#e3ddd0; --line-strong:#cdc4b0;
+    --ink:#495059; --ink-soft:#7c828c; --ink-faint:#a6aab1;
+    --gold:#c8a668; --orange:#f78945; --orange-dark:#e0722e; --orange-soft: rgba(247,137,69,0.12);
+    color-scheme: light;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background: var(--paper); color: var(--ink);
+    font-family:'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  }
+  .wrap{ max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+  .site-header{ border-bottom: 1px solid var(--line); padding: 22px 0; margin-bottom: 40px; }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .mark{ width:34px; height:34px; position:relative; flex:none; }
+  .mark i{ position:absolute; width:22px; height:22px; border: 2px solid var(--gold); transform: rotate(45deg); }
+  .mark i:first-child{ top:0; left:6px; }
+  .mark i:last-child{ top:9px; left:-3px; border-color: var(--orange); opacity:.85; }
+  .wordmark .name{ font-weight:600; font-size: 19px; letter-spacing: 2.5px; color: var(--ink); }
+  .wordmark .tag{ font-size: 10.5px; letter-spacing: 2px; text-transform:uppercase; color: var(--ink-faint); }
+  .eyebrow{ font-size: 11.5px; letter-spacing: 2px; text-transform:uppercase; color: var(--orange); font-weight:600; margin-bottom: 10px; }
+  h1{ font-weight: 300; font-size: clamp(24px, 4vw, 34px); line-height:1.2; margin: 0 0 12px; }
+  .sub{ color: var(--ink-soft); font-size: 14px; line-height:1.65; max-width: 65ch; margin:0 0 34px; }
+  .list{ display:flex; flex-direction:column; gap:14px; }
+  .item{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    border: 1px solid var(--line); padding: 18px 20px; text-decoration:none; color:inherit;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .item:hover{ border-color: var(--orange); background: var(--orange-soft); }
+  .item-name{ font-size:15px; font-weight:600; color: var(--ink); margin:0 0 4px; }
+  .item-desc{ font-size:12.5px; color: var(--ink-soft); margin:0; }
+  .item-go{ color: var(--orange-dark); font-weight:700; font-size:13px; white-space:nowrap; }
+  .footnote{ margin-top: 50px; padding-top:18px; border-top:1px solid var(--line); font-size:12px; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site-header">
+    <div class="brand">
+      <div class="mark"><i></i><i></i></div>
+      <div class="wordmark">
+        <div class="name">GOLDSTEIN</div>
+        <div class="tag">Intellectual Property</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="eyebrow">Preparado por C-Suite Network</div>
+  <h1>Páginas de demostración</h1>
+  <p class="sub">Prototipos e insumos de trabajo preparados para Goldstein Patent Law.</p>
+
+  <div class="list">
+    <a class="item" href="funnel-simulator/">
+      <div>
+        <p class="item-name">Simulador de funnel</p>
+        <p class="item-desc">Comparación lado a lado: cómo captura un email hoy vs. el modelo recomendado con quiz + gate.</p>
+      </div>
+      <span class="item-go">Ver &rarr;</span>
+    </a>
+    <a class="item" href="mapa-mental/">
+      <div>
+        <p class="item-name">Mapa del Content Pipeline</p>
+        <p class="item-desc">De los activos crudos a las siete líneas de salida de contenido.</p>
+      </div>
+      <span class="item-go">Ver &rarr;</span>
+    </a>
+  </div>
+
+  <div class="footnote">C-Suite Network &middot; carpeta de cliente: Goldstein Patent Law</div>
+</div>
+</body>
+</html>
